@@ -1,27 +1,43 @@
 <p id="notice"><%= notice %></p>
+<% if current_user %>
 
-<h1>Tasks</h1>
+  <h1>Todo List</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <form action="/search">
+    <input name = "q" type="text" placeholder="Search">
+    <button type="submit">Search</button>
+  </form>
 
-  <tbody>
-    <% @tasks.each do |task| %>
+  <br>
+
+  <table>
+    <thead>
       <tr>
-        <td><%= task.description %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>#</th>
+        <th>User</th>
+        <th>Description</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% current_user.tasks.each do |task| %>
+        <tr>
+          <td><%= task.id %></td>
+          <td><%= task.user_id %></td>
+          <td><%= task.description %></td>
+          <td><%= link_to 'Show', task %></td>
+          <td><%= link_to 'Edit', edit_task_path(task) %></td>
+          <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= raw pagy_nav(@pagy) %>
+  <br>
 
-<%= link_to 'New Task', new_task_path %>
+  <%= link_to 'New Task', new_task_path %>
+
+<% else %>
+  <h1>Please log in</h1>
+<% end %>

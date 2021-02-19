@@ -2,7 +2,11 @@ class TasksController < ApplicationController
   #before_action :set_task, only: %i[ show edit update destroy ]
 
   def index
-    @tasks = Task.all
+    @pagy, @tasks = pagy(Task.all, items: 5)
+  end
+
+  def search
+    @tasks = Task.where("description LIKE ?", "%" + params[:q] + "%")
   end
 
   def show
@@ -19,6 +23,8 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.create(task_params)
+    @task.user_id = current_user.id
+    @task.save
     if @task.valid?
       redirect_to tasks_path
     else

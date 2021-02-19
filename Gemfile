@@ -25,6 +25,9 @@ gem 'jbuilder', '~> 2.7'
 # gem 'devise'
 gem 'devise', '~> 4.2'
 
+# Fast pagination
+gem 'pagy', '~> 0.6.0'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
