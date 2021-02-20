@@ -28,6 +28,8 @@ gem 'devise', '~> 4.2'
 # Fast pagination
 gem 'pagy', '~> 0.6.0'
 
+gem 'has_scope'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

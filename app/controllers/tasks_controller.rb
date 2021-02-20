@@ -1,12 +1,9 @@
 class TasksController < ApplicationController
+  has_scope :search
   #before_action :set_task, only: %i[ show edit update destroy ]
 
   def index
-    @pagy, @tasks = pagy(Task.all, items: 5)
-  end
-
-  def search
-    @tasks = Task.where("description LIKE ?", "%" + params[:q] + "%")
+    @pagy, @tasks = pagy(apply_scopes(current_user.tasks), items: 5)
   end
 
   def show
