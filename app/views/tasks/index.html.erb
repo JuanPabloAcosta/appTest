@@ -1,0 +1,77 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <p id="notice"><%= notice %></p>
+      <% if current_user %>
+        <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+        <h1>Todo List:</h1>
+        <div class="mb-3">
+          <form action="/" method="GET">
+            <div class="row">
+              <div class="col-3">
+                <input class="form-control" name = "search" type="text" placeholder="Search">
+              </div>
+              <div class="col-2">
+                <button type="submit" class="btn btn-primary mb-3">Search</button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <br>
+        <div class="row">
+          <div class="col-5">
+            <table class="table"  style="font-family: 'Open Sans'">
+              <thead>
+                <tr class="table-success">
+                  <th scope="col">#</th>
+                  <th scope="col">User</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Complete</th>
+                  <th colspan="3" scope="col"></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% @tasks.each do |task| %>
+                  <tr>
+                    <td><%= task.id %></td>
+                    <td><%= task.user_id %></td>
+                    <td><%= task.description %></td>
+                    <td>
+                      <div style="text-align:center">
+                        <input type="checkbox", name="task_complete", style="min-height:25px;min-width:25px; margin-top:5px">
+                      </div>
+                    </td>
+                    <td>
+                      <%= link_to task, method: :delete, data: { confirm: 'Are you sure?' } do %>
+                        <button class="btn btn-danger">
+                          <i class="bi bi-x-circle-fill px0"></i>
+                        </button>
+                      <% end %>
+                    </td>
+                    <td>
+                      <%= link_to edit_task_path(task) do %>
+                        <button class="btn btn-outline-primary">
+                          <i class="bi bi-pencil-fill"></i>
+                        </button>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <%== pagy_nav(@pagy)%>
+            <br>
+          </div>
+        </div>  
+        <%= link_to new_task_path do %>
+          <%= button_to "Add", {action: 'create'}, {class:'btn btn-primary mb-3'} %>
+        <% end %>
+      <% else %>
+        <h1>Please log in</h1>
+        <%= render "shared/login" %>
+      <% end %>
+    </div>
+  </div>
+</div>
