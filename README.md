@@ -1,24 +1,5 @@
-# README
+# AppTest
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a test application that works as a task list, where you can add, edit, delete or mark as complete/incomplete. Everything is built in ruby on rails.
 
-Things you may want to cover:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
